@@ -1,19 +1,13 @@
-# tokens - array of brackets and integers
-tokens = gets.split(/(\(|\)|\s)/).reject {|c| c =~ /^ *$/}
+# Вариант решения не только для бинарного дерева
+# Если кто подскажет, как написать лучше (короче!), буду рад ;)
 
-# contribution of every leaf: value / 2^depth
-average = 0
-divisor = 1
-tokens.each do |t|
-  case t
-  when '('
-    divisor *= 2
-  when ')'
-    divisor /= 2
-  else
-    i = t.to_f
-    average += i/divisor
-  end
+s = gets
+
+while (tmp=s[/(\([^()]+\))/])
+	result=0
+	arr=tmp[1..-2].split(/\s/).reject {|e| e=~ /^\s*$/}
+	arr.each {|e| result+=e.to_f/arr.size}
+	s[/(\([^()]+\))/]=" "+result.to_s+" "
 end
 
-puts average
+p s.to_f
